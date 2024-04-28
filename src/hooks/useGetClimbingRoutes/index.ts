@@ -6,7 +6,6 @@ const fetchClimbingRoutes = async () => {
   try {
     const response = await RESTClient.get("/climbing-route");
 
-    console.log(response.data, "<---");
     return response.data;
   } catch (error) {
     console.error(error);

@@ -1,9 +1,7 @@
 "use client";
-import Image from "next/image";
 
+import { DialogDemo } from "@/components/dialog";
 import { Button } from "@/components/ui/button";
-
-import { useGetClimbingRoutes } from "@/hooks/useGetClimbingRoutes";
 import {
   Table,
   TableBody,
@@ -12,19 +10,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableFooter,
 } from "@/components/ui/table";
+
+import { useGetClimbingRoutes } from "@/hooks/useGetClimbingRoutes";
 
 export default function Home() {
   const { data: climbingRoutes } = useGetClimbingRoutes();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-start space-y-10 sm:p-24 p-4">
+      <h1 className="text-xl font-bold mb-8">bulder.</h1>
+      <DialogDemo />
+      <h3 className="font-bold">All routes</h3>
       <Table className="w-full">
-        <TableCaption>A list of your recent routes.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Route</TableHead>
-
             <TableHead className="text-left">Setter</TableHead>
             <TableHead className="text-left">Grade</TableHead>
             <TableHead className="text-left">Color</TableHead>
@@ -33,9 +33,10 @@ export default function Home() {
         <TableBody>
           {climbingRoutes?.map((route) => (
             <TableRow key={route.name}>
-              <TableCell className="font-medium">{route.grade}</TableCell>
+              <TableCell className="font-medium">{route.name}</TableCell>
+
               <TableCell className="text-left">{route.setter}</TableCell>
-              <TableCell>{route.opinion_grade}</TableCell>
+              <TableCell>{route.grade}</TableCell>
               <TableCell className="text-left">{route.color}</TableCell>
             </TableRow>
           ))}
